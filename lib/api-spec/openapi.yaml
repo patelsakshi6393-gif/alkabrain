@@ -3,20 +3,33 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: LeadFlow Marketing Automation API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: users
+    description: User management
+  - name: campaigns
+    description: Campaign management
+  - name: templates
+    description: Email/WhatsApp templates
+  - name: leads
+    description: Lead scraping and management
+  - name: integrations
+    description: Gmail and WhatsApp integrations
+  - name: billing
+    description: Subscription and billing
+  - name: credits
+    description: Credits management
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,7 +37,335 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /users/me:
+    get:
+      operationId: getMe
+      tags: [users]
+      summary: Get current user profile with credits and plan
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: User profile
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserProfile"
+
+  /users/dashboard:
+    get:
+      operationId: getDashboard
+      tags: [users]
+      summary: Get dashboard summary stats
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Dashboard stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardStats"
+
+  /templates:
+    get:
+      operationId: getTemplates
+      tags: [templates]
+      summary: List all templates for current user
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of templates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Template"
+    post:
+      operationId: createTemplate
+      tags: [templates]
+      summary: Create a new template
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTemplateBody"
+      responses:
+        "201":
+          description: Template created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Template"
+
+  /templates/{id}:
+    put:
+      operationId: updateTemplate
+      tags: [templates]
+      summary: Update a template
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTemplateBody"
+      responses:
+        "200":
+          description: Template updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Template"
+    delete:
+      operationId: deleteTemplate
+      tags: [templates]
+      summary: Delete a template
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /campaigns:
+    get:
+      operationId: getCampaigns
+      tags: [campaigns]
+      summary: List all campaigns
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: List of campaigns
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Campaign"
+    post:
+      operationId: createCampaign
+      tags: [campaigns]
+      summary: Create and launch a campaign
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCampaignBody"
+      responses:
+        "201":
+          description: Campaign created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Campaign"
+
+  /campaigns/{id}:
+    get:
+      operationId: getCampaign
+      tags: [campaigns]
+      summary: Get campaign details with lead stats
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Campaign details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Campaign"
+
+  /leads/scrape:
+    post:
+      operationId: scrapeLeads
+      tags: [leads]
+      summary: Scrape leads from DuckDuckGo for a niche
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScrapeLeadsBody"
+      responses:
+        "200":
+          description: Scraped leads
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScrapeLeadsResult"
+
+  /integrations/gmail:
+    get:
+      operationId: getGmailIntegration
+      tags: [integrations]
+      summary: Get Gmail integration status
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Gmail integration status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GmailIntegration"
+    post:
+      operationId: saveGmailIntegration
+      tags: [integrations]
+      summary: Save Gmail sender email and app password
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SaveGmailBody"
+      responses:
+        "200":
+          description: Saved
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GmailIntegration"
+
+  /integrations/whatsapp/status:
+    get:
+      operationId: getWhatsappStatus
+      tags: [integrations]
+      summary: Get WhatsApp session status
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: WhatsApp status
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WhatsappStatus"
+
+  /integrations/whatsapp/connect:
+    post:
+      operationId: connectWhatsapp
+      tags: [integrations]
+      summary: Initiate WhatsApp connection (returns QR code data)
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: QR code for scanning
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WhatsappQR"
+
+  /integrations/whatsapp/disconnect:
+    post:
+      operationId: disconnectWhatsapp
+      tags: [integrations]
+      summary: Disconnect WhatsApp session
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Disconnected
+
+  /billing/plans:
+    get:
+      operationId: getBillingPlans
+      tags: [billing]
+      summary: Get all available plans
+      responses:
+        "200":
+          description: List of plans
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/BillingPlan"
+
+  /billing/subscription:
+    get:
+      operationId: getSubscription
+      tags: [billing]
+      summary: Get current user subscription
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Current subscription
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Subscription"
+
+  /billing/webhook:
+    post:
+      operationId: billingWebhook
+      tags: [billing]
+      summary: Payment webhook for verification
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          description: Webhook processed
+
+  /credits/history:
+    get:
+      operationId: getCreditsHistory
+      tags: [credits]
+      summary: Get credits usage history
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Credits history
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CreditTransaction"
+
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
   schemas:
     HealthStatus:
       type: object
@@ -34,3 +375,359 @@ components:
       required:
         - status
 
+    UserProfile:
+      type: object
+      properties:
+        id:
+          type: integer
+        clerkId:
+          type: string
+        email:
+          type: string
+        name:
+          type: string
+        creditsRemaining:
+          type: integer
+        creditsUsed:
+          type: integer
+        planId:
+          type: string
+          nullable: true
+        planName:
+          type: string
+          nullable: true
+        planExpiresAt:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+      required:
+        - id
+        - clerkId
+        - email
+        - creditsRemaining
+        - creditsUsed
+
+    DashboardStats:
+      type: object
+      properties:
+        creditsRemaining:
+          type: integer
+        creditsUsed:
+          type: integer
+        totalCampaigns:
+          type: integer
+        activeCampaigns:
+          type: integer
+        totalLeads:
+          type: integer
+        emailsSent:
+          type: integer
+        whatsappSent:
+          type: integer
+        planName:
+          type: string
+          nullable: true
+        planExpiresAt:
+          type: string
+          nullable: true
+      required:
+        - creditsRemaining
+        - creditsUsed
+        - totalCampaigns
+        - activeCampaigns
+        - totalLeads
+        - emailsSent
+        - whatsappSent
+
+    Template:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+          enum: [email, whatsapp]
+        subject:
+          type: string
+          nullable: true
+        body:
+          type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - name
+        - type
+        - body
+
+    CreateTemplateBody:
+      type: object
+      properties:
+        name:
+          type: string
+        type:
+          type: string
+          enum: [email, whatsapp]
+        subject:
+          type: string
+          nullable: true
+        body:
+          type: string
+      required:
+        - name
+        - type
+        - body
+
+    Campaign:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        niche:
+          type: string
+        status:
+          type: string
+          enum: [draft, running, completed, failed]
+        emailSubject:
+          type: string
+          nullable: true
+        emailBody:
+          type: string
+          nullable: true
+        whatsappMessage:
+          type: string
+          nullable: true
+        sendEmail:
+          type: boolean
+        sendWhatsapp:
+          type: boolean
+        totalLeads:
+          type: integer
+        emailsSent:
+          type: integer
+        whatsappSent:
+          type: integer
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - name
+        - niche
+        - status
+        - sendEmail
+        - sendWhatsapp
+        - totalLeads
+        - emailsSent
+        - whatsappSent
+
+    CreateCampaignBody:
+      type: object
+      properties:
+        name:
+          type: string
+        niche:
+          type: string
+        emailSubject:
+          type: string
+          nullable: true
+        emailBody:
+          type: string
+          nullable: true
+        whatsappMessage:
+          type: string
+          nullable: true
+        sendEmail:
+          type: boolean
+        sendWhatsapp:
+          type: boolean
+        templateId:
+          type: integer
+          nullable: true
+      required:
+        - name
+        - niche
+        - sendEmail
+        - sendWhatsapp
+
+    ScrapeLeadsBody:
+      type: object
+      properties:
+        niche:
+          type: string
+        maxResults:
+          type: integer
+      required:
+        - niche
+
+    ScrapeLeadsResult:
+      type: object
+      properties:
+        leads:
+          type: array
+          items:
+            $ref: "#/components/schemas/Lead"
+        total:
+          type: integer
+        creditsUsed:
+          type: integer
+      required:
+        - leads
+        - total
+        - creditsUsed
+
+    Lead:
+      type: object
+      properties:
+        email:
+          type: string
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        website:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        source:
+          type: string
+          nullable: true
+      required: []
+
+    GmailIntegration:
+      type: object
+      properties:
+        id:
+          type: integer
+          nullable: true
+        senderEmail:
+          type: string
+          nullable: true
+        isConnected:
+          type: boolean
+        createdAt:
+          type: string
+          nullable: true
+      required:
+        - isConnected
+
+    SaveGmailBody:
+      type: object
+      properties:
+        senderEmail:
+          type: string
+        appPassword:
+          type: string
+      required:
+        - senderEmail
+        - appPassword
+
+    WhatsappStatus:
+      type: object
+      properties:
+        isConnected:
+          type: boolean
+        phone:
+          type: string
+          nullable: true
+        sessionExists:
+          type: boolean
+      required:
+        - isConnected
+        - sessionExists
+
+    WhatsappQR:
+      type: object
+      properties:
+        qrCode:
+          type: string
+          nullable: true
+        status:
+          type: string
+      required:
+        - status
+
+    BillingPlan:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        price:
+          type: number
+        currency:
+          type: string
+        durationDays:
+          type: integer
+        credits:
+          type: integer
+        features:
+          type: array
+          items:
+            type: string
+        isPopular:
+          type: boolean
+      required:
+        - id
+        - name
+        - price
+        - currency
+        - durationDays
+        - credits
+        - features
+        - isPopular
+
+    Subscription:
+      type: object
+      properties:
+        id:
+          type: integer
+          nullable: true
+        planId:
+          type: string
+          nullable: true
+        planName:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        expiresAt:
+          type: string
+          nullable: true
+        isActive:
+          type: boolean
+      required:
+        - isActive
+
+    CreditTransaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+          enum: [credit, debit]
+        amount:
+          type: integer
+        description:
+          type: string
+        createdAt:
+          type: string
+      required:
+        - id
+        - type
+        - amount
+        - description
+        - createdAt

@@ -1,4 +1,4 @@
-import express, { type Express } from "express";
+import express, { type Express, type Request, type Response, type NextFunction } from "express";
 import cors from "cors";
 import pinoHttp from "pino-http";
 import { clerkMiddleware } from "@clerk/express";
@@ -31,6 +31,14 @@ app.use(
 app.use(CLERK_PROXY_PATH, clerkProxyMiddleware());
 
 app.use(cors({ credentials: true, origin: true }));
+
+// Capture raw body for Razorpay webhook signature verification
+// Must be mounted BEFORE express.json() for the webhook path
+app.use("/api/billing/razorpay-webhook", express.raw({ type: "*/*" }), (req: Request, _res: Response, next: NextFunction) => {
+  (req as any).rawBody = req.body;
+  next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

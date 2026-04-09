@@ -132,7 +132,7 @@ async function runCampaignInBackground(
             if (!lead.email) continue;
             try {
               await transporter.sendMail({
-                from: `"LeadFlow" <${gmailInteg.senderEmail}>`,
+                from: `"ALKABRAIN" <${gmailInteg.senderEmail}>`,
                 to: lead.email,
                 subject: campaign.emailSubject || "Business Opportunity",
                 text: campaign.emailBody || "",

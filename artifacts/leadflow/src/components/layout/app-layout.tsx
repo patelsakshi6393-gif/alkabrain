@@ -49,9 +49,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
       <div className="flex h-screen overflow-hidden w-full bg-gray-50 dark:bg-gray-900">
         <Sidebar>
           <SidebarHeader className="p-4 flex items-center h-16 border-b border-sidebar-border">
-            <Link href="/dashboard" className="flex items-center gap-2" data-testid="link-logo">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-xl">L</div>
-              <span className="text-xl font-bold text-sidebar-foreground">LeadFlow</span>
+            <Link href="/dashboard" className="flex items-center gap-2.5" data-testid="link-logo">
+              <img src="/logo.png" alt="ALKABRAIN" className="w-8 h-8 rounded-xl object-cover" />
+              <span className="text-lg font-black text-sidebar-foreground">ALKA<span className="text-transparent bg-clip-text" style={{ backgroundImage: "linear-gradient(135deg, #6366f1, #a855f7)" }}>BRAIN</span></span>
             </Link>
           </SidebarHeader>
           <SidebarContent className="p-2 gap-1">
@@ -100,7 +100,7 @@ export default function AppLayout({ children }: AppLayoutProps) {
         <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
           <header className="h-16 flex items-center gap-4 px-6 bg-background border-b border-border flex-shrink-0 lg:hidden">
             <SidebarTrigger />
-            <h1 className="font-semibold text-lg">LeadFlow</h1>
+            <h1 className="font-semibold text-lg font-black">ALKABRAIN</h1>
           </header>
           <div className="flex-1 overflow-y-auto p-6 lg:p-8">
             {children}

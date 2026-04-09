@@ -1,0 +1,8 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "Oke96J9mVoPEsUKAa0miZ"
+uri = "file://artifacts/leadflow/public/logo.png"
+type = "image"
+title = "alkabrain-logo"

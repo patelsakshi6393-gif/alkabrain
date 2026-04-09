@@ -18,16 +18,16 @@ export default function Privacy() {
       <div className="max-w-3xl mx-auto py-16 px-6 lg:px-8">
         <div className="mb-10">
           <h1 className="text-4xl font-extrabold text-foreground mb-3">Privacy Policy</h1>
-          <p className="text-muted-foreground">Last updated: {lastUpdated} · Applies to all LeadFlow users</p>
+          <p className="text-muted-foreground">Last updated: {lastUpdated} · Applies to all ALKABRAIN users</p>
           <div className="mt-4 p-4 rounded-lg bg-primary/5 border border-primary/20 text-sm text-foreground/80">
-            <strong>Our Commitment:</strong> At LeadFlow Technologies, your privacy is fundamental to us. We are transparent about how we collect, use, and protect your personal data. This Privacy Policy explains your rights and our responsibilities under applicable Indian privacy laws and international best practices.
+            <strong>Our Commitment:</strong> At ALKABRAIN Technologies, your privacy is fundamental to us. We are transparent about how we collect, use, and protect your personal data. This Privacy Policy explains your rights and our responsibilities under applicable Indian privacy laws and international best practices.
           </div>
         </div>
 
         <Section num="1" title="Who We Are">
-          <p>LeadFlow Technologies ("Company", "we", "us", "our") operates the LeadFlow marketing automation platform.</p>
+          <p>ALKABRAIN Technologies ("Company", "we", "us", "our") operates the ALKABRAIN marketing automation platform.</p>
           <p>We act as the <strong>Data Controller</strong> for the personal data of our registered users. For data processed on behalf of our users (e.g., scraped lead contact data), our users act as independent Data Controllers and we act as a Data Processor.</p>
-          <p>For privacy-related questions or to exercise your rights, contact our Data Protection Officer at: <a href="mailto:privacy@leadflow.in" className="text-primary hover:underline">privacy@leadflow.in</a></p>
+          <p>For privacy-related questions or to exercise your rights, contact our Data Protection Officer at: <a href="mailto:privacy@alkabrain.in" className="text-primary hover:underline">privacy@alkabrain.in</a></p>
         </Section>
 
         <Section num="2" title="Data We Collect About You">
@@ -114,7 +114,7 @@ export default function Privacy() {
             <li><strong>Right to Object:</strong> Object to processing based on legitimate interests or for direct marketing.</li>
             <li><strong>Right to Withdraw Consent:</strong> Where processing is based on consent, withdraw it at any time.</li>
           </ul>
-          <p className="mt-3">To exercise any right, email <a href="mailto:privacy@leadflow.in" className="text-primary hover:underline">privacy@leadflow.in</a>. We will respond within 30 days after verifying your identity.</p>
+          <p className="mt-3">To exercise any right, email <a href="mailto:privacy@alkabrain.in" className="text-primary hover:underline">privacy@alkabrain.in</a>. We will respond within 30 days after verifying your identity.</p>
         </Section>
 
         <Section num="9" title="Cookies and Tracking">
@@ -130,7 +130,7 @@ export default function Privacy() {
 
         <Section num="10" title="Children's Privacy">
           <p>The Platform is not intended for individuals under 18 years of age. We do not knowingly collect personal data from minors.</p>
-          <p>If we become aware of data collected from a minor, we will delete it immediately. Contact <a href="mailto:privacy@leadflow.in" className="text-primary hover:underline">privacy@leadflow.in</a> if you believe a minor has provided us with data.</p>
+          <p>If we become aware of data collected from a minor, we will delete it immediately. Contact <a href="mailto:privacy@alkabrain.in" className="text-primary hover:underline">privacy@alkabrain.in</a> if you believe a minor has provided us with data.</p>
         </Section>
 
         <Section num="11" title="International Data Transfers">
@@ -163,8 +163,8 @@ export default function Privacy() {
           <p className="font-semibold text-foreground mb-2">Contact Our Privacy Team</p>
           <p className="text-sm text-muted-foreground">For any privacy concerns, data requests, or to exercise your rights:</p>
           <ul className="mt-2 space-y-1 text-sm">
-            <li>Data Protection Officer: <a href="mailto:privacy@leadflow.in" className="text-primary hover:underline">privacy@leadflow.in</a></li>
-            <li>General Support: <a href="mailto:support@leadflow.in" className="text-primary hover:underline">support@leadflow.in</a></li>
+            <li>Data Protection Officer: <a href="mailto:privacy@alkabrain.in" className="text-primary hover:underline">privacy@alkabrain.in</a></li>
+            <li>General Support: <a href="mailto:support@alkabrain.in" className="text-primary hover:underline">support@alkabrain.in</a></li>
             <li>Response Time: Within 30 days of receiving your verified request</li>
           </ul>
           <p className="text-xs text-muted-foreground mt-3">

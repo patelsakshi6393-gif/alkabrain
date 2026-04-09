@@ -93,7 +93,7 @@ export default function NewCampaign() {
       <Alert className="border-primary/30 bg-primary/5">
         <Zap className="h-4 w-4 text-primary" />
         <AlertDescription className="text-sm">
-          <strong>100% Automatic:</strong> After you click Launch, LeadFlow will automatically scrape leads for your niche, send emails via your Gmail, and send WhatsApp messages — no manual steps needed.
+          <strong>100% Automatic:</strong> After you click Launch, ALKABRAIN will automatically scrape leads for your niche, send emails via your Gmail, and send WhatsApp messages — no manual steps needed.
         </AlertDescription>
       </Alert>
 

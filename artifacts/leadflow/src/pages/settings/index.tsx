@@ -97,7 +97,7 @@ export default function Settings() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = "leadflow-account-export.json";
+    a.download = "alkabrain-account-export.json";
     a.click();
     URL.revokeObjectURL(url);
     toast({ title: "Data exported! Check your downloads." });
@@ -464,7 +464,7 @@ export default function Settings() {
           <div className="flex items-center justify-between py-1">
             <div>
               <p className="font-medium text-sm">Terms of Service</p>
-              <p className="text-xs text-muted-foreground">Rules for using LeadFlow</p>
+              <p className="text-xs text-muted-foreground">Rules for using ALKABRAIN</p>
             </div>
             <Link href="/terms">
               <Button variant="ghost" size="sm" className="text-xs h-7 text-primary">
@@ -514,7 +514,7 @@ export default function Settings() {
               data-testid="btn-delete-account"
               onClick={() => toast({
                 title: "Contact support to delete your account",
-                description: "Email us at support@leadflow.in with subject 'Delete Account'",
+                description: "Email us at support@alkabrain.in with subject 'Delete Account'",
                 variant: "destructive"
               })}
             >

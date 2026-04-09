@@ -1,8 +1,8 @@
-# LeadFlow - Marketing Automation Platform
+# ALKABRAIN - Marketing Automation Platform
 
 ## Overview
 
-LeadFlow is a full-stack marketing automation platform built for Indian SMBs. It enables users to find leads via DuckDuckGo scraping, send email and WhatsApp campaigns, manage templates, and track credits.
+ALKABRAIN is a full-stack marketing automation platform built for Indian SMBs. It enables users to find leads via DuckDuckGo scraping, send email and WhatsApp campaigns, manage templates, and track credits.
 
 ## Stack
 

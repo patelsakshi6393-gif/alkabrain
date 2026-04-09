@@ -33,7 +33,7 @@ router.post("/integrations/gmail", requireAuth, async (req: AuthRequest, res) =>
     }
 
     // Simple XOR obfuscation for app password (not true encryption but better than plaintext)
-    const key = process.env.SESSION_SECRET || "leadflow-key";
+    const key = process.env.SESSION_SECRET || "alkabrain-key";
     const encrypted = Buffer.from(appPassword).toString("base64");
 
     const existing = await db.select().from(gmailIntegrationsTable)
